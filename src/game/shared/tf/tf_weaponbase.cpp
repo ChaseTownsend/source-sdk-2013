@@ -2269,9 +2269,7 @@ void CTFWeaponBase::SetReloadTimer( float flReloadTime )
 		}
 		else if ( pPlayer->GetHealth() < pPlayer->GetMaxHealth() )
 		{
-			float healthpercent = (float)pPlayer->GetHealth() / (float)pPlayer->GetMaxHealth();
-			// flReloadTime *= RemapValClamped(pPlayer->HealthFraction(), 0.0f, 1.0f, 0.3f, 1.0f);
-			flReloadTime *= RemapValClamped(healthpercent, 0.0f, 1.0f, 0.3f, 1.0f);
+			flReloadTime *= RemapValClamped(pPlayer->HealthFraction(), 0.0f, 1.0f, 0.3f, 1.0f);
 		}
 	}
 
