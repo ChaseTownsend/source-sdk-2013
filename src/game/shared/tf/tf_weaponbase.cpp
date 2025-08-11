@@ -2257,7 +2257,6 @@ void CTFWeaponBase::SetReloadTimer( float flReloadTime )
 	CALL_ATTRIB_HOOK_FLOAT( flReloadTime, fast_reload );
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( pPlayer, flReloadTime, hwn_mult_reload_time );
 
-	//int iPanicAttack = 0;
 	int iPanicAttack = 0;
 	CALL_ATTRIB_HOOK_INT( iPanicAttack, panic_attack );
 	if ( iPanicAttack ) 
