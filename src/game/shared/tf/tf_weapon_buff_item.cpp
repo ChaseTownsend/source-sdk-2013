@@ -306,10 +306,6 @@ void CTFBuffItem::CreateBanner()
 		if ( !pPlayer || !pPlayer->IsAlive() )
 			return;
 
-		C_TFBuffBanner* pBanner = new C_TFBuffBanner;
-		if ( !pBanner )
-			return;
-
 		int iBuffType = GetBuffType();
 		// Prevent Crashes From Invalid Buff Types
 		if ( iBuffType > ARRAYSIZE(BannerModels) || iBuffType <= 0 )
@@ -317,6 +313,10 @@ void CTFBuffItem::CreateBanner()
 			DevMsg("Invalid buff type %d, Not Creating Banner\n", iBuffType);
 			return;
 		}
+
+		C_TFBuffBanner* pBanner = new C_TFBuffBanner;
+		if ( !pBanner )
+			return;
 		
 		//Assert( iBuffType > 0 );
 		//Assert( iBuffType <= ARRAYSIZE(BannerModels) );
