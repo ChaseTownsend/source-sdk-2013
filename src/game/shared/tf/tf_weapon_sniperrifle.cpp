@@ -445,7 +445,9 @@ void CTFSniperRifle::PlayWeaponShootSound( void )
 	{
 		float flDamageBonus = 1.0f;
 		CALL_ATTRIB_HOOK_FLOAT( flDamageBonus, sniper_full_charge_damage_bonus );
-		if ( flDamageBonus > 1.0f )
+		// Prevents Non-Machina rifles with "sniper_full_charge_damage_bonus" 
+		// from playing "SPECIAL3", which usually is Undefined
+		if ( flDamageBonus > 1.0f && GetRifleType() == RIFLE_MACHINA )
 		{
 			WeaponSound( SPECIAL3 );
 			return;
