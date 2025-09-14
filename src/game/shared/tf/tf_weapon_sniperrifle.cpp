@@ -442,17 +442,19 @@ void CTFSniperRifle::PlayWeaponShootSound( void )
 	}
 
 	if ( !IsFullyCharged() )
+{
+	float flDamageBonus = 1.0f;
+	CALL_ATTRIB_HOOK_FLOAT( flDamageBonus, sniper_full_charge_damage_bonus );
+	const CEconItemView* pItem = GetAttributeContainer()->GetItem();
+	// Fixes Rifles with "sniper_full_charge_damage_bonus"
+	// playing an undefined "SPECIAL3" sound when not fully charged.
+	// Improvment By Bitl
+	if (flDamageBonus > 1.0f && (pItem && pItem->GetStaticData()->GetWeaponReplacementSound(GetTeamNumber(), SPECIAL3)))
 	{
-		float flDamageBonus = 1.0f;
-		CALL_ATTRIB_HOOK_FLOAT( flDamageBonus, sniper_full_charge_damage_bonus );
-		// Prevents Non-Machina rifles with "sniper_full_charge_damage_bonus" 
-		// from playing "SPECIAL3", which usually is Undefined
-		if ( flDamageBonus > 1.0f && GetRifleType() == RIFLE_MACHINA )
-		{
-			WeaponSound( SPECIAL3 );
-			return;
-		}
+		WeaponSound( SPECIAL3 );
+		return;
 	}
+}
 
 	BaseClass::PlayWeaponShootSound();
 }
