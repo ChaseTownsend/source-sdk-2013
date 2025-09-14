@@ -40,10 +40,10 @@ extern ConVar tf_mm_trusted;
 static ConVar tf_stats_nogameplaycheck( "tf_stats_nogameplaycheck", "0", FCVAR_NONE , "Disable normal check for valid gameplay, send stats regardless." );
 //static ConVar tf_stats_track( "tf_stats_track", "1", FCVAR_NONE, "Turn on//off tf stats tracking." );
 //static ConVar tf_stats_verbose( "tf_stats_verbose", "0", FCVAR_NONE, "Turn on//off verbose logging of stats." );
-ConVar tf_stats_bogus_damage_max("tf_stats_bogus_damage_max", "1500", FCVAR_REPLICATED, "Maximum Damage before Bogus warning");
-ConVar tf_stats_bogus_damage_mvm_max("tf_stats_bogus_damage_mvm_max", "5000", FCVAR_REPLICATED, "Maximum Damage in mvm before Bogus warning");
-ConVar tf_stats_bogus_healing_max("tf_stats_bogus_healing_max", "1000", FCVAR_REPLICATED, "Maximum Healing before Bogus warning");
-ConVar tf_stats_bogus_block_damage_max("tf_stats_bogus_block_damage_max", "3000", FCVAR_REPLICATED, "Maximum Damage Blocked before Bogus warning");
+ConVar tf_stats_bogus_damage_max("tf_stats_bogus_damage_max", "1500", FCVAR_REPLICATED, "Maximum damage before bogus warning");
+ConVar tf_stats_bogus_damage_mvm_max("tf_stats_bogus_damage_mvm_max", "5000", FCVAR_REPLICATED, "Maximum damage in mvm before bogus warning");
+ConVar tf_stats_bogus_healing_max("tf_stats_bogus_healing_max", "1000", FCVAR_REPLICATED, "Maximum healing before bogus warning");
+ConVar tf_stats_bogus_block_damage_max("tf_stats_bogus_block_damage_max", "3000", FCVAR_REPLICATED, "Maximum damage blocked before bogus warning");
 ConVar tf_stats_bogus_return("tf_stats_bogus_return", "1", FCVAR_REPLICATED, "Return without recording stats if bogus values are found");
 
 CTFGameStats CTF_GameStats;
@@ -729,12 +729,12 @@ void CTFGameStats::Event_PlayerHealedOther( CTFPlayer *pPlayer, float amount )
 	{
 		if ( tf_stats_bogus_return.GetBool() )
 		{
-			DevMsg("CTFGameStats: Bogus Healing value found, %d, ignoring\n", iAmount);
+			DevMsg("CTFGameStats: bogus healing value found, %d, ignoring\n", iAmount);
 			return;
 		}
 		else
 		{
-			DevMsg("CTFGameStats: Bogus Healing value found, %d\n", iAmount);
+			DevMsg("CTFGameStats: bogus healing value found, %d\n", iAmount);
 		}
 	}
 	IncrementStat( pPlayer, TFSTAT_HEALING, (int) amount );
@@ -772,12 +772,12 @@ void CTFGameStats::Event_PlayerHealedOtherAssist( CTFPlayer *pPlayer, float amou
 	{
 		if ( tf_stats_bogus_return.GetBool() )
 		{
-			DevMsg("CTFGameStats: Bogus Healing value found, %d, ignoring\n", iAmount);
+			DevMsg("CTFGameStats: bogus healing value found, %d, ignoring\n", iAmount);
 			return;
 		}
 		else
 		{
-			DevMsg("CTFGameStats: Bogus Healing value found, %d\n", iAmount);
+			DevMsg("CTFGameStats: bogus healing value found, %d\n", iAmount);
 		}
 	}
 
@@ -794,12 +794,12 @@ void CTFGameStats::Event_PlayerBlockedDamage( CTFPlayer *pPlayer, int nAmount )
 	{
 		if ( tf_stats_bogus_return.GetBool() )
 		{
-			DevMsg("CTFGameStats: Bogus Blocked Damage value found, %d, ignoring\n", nAmount);
+			DevMsg("CTFGameStats: bogus blocked damage value found, %d, ignoring\n", nAmount);
 			return;
 		}
 		else
 		{
-			DevMsg("CTFGameStats: Bogus Blocked Damage value found, %d\n", nAmount);
+			DevMsg("CTFGameStats: bogus blocked damage value found, %d\n", nAmount);
 		}
 	}
 	IncrementStat( pPlayer, TFSTAT_DAMAGE_BLOCKED, nAmount );
@@ -1073,12 +1073,12 @@ void CTFGameStats::Event_PlayerDamage( CBasePlayer *pBasePlayer, const CTakeDama
 	{
 		if (tf_stats_bogus_return.GetBool())
 		{
-			DevMsg("CTFGameStats: Bogus Damage value found, %d, ignoring\n", iDamageTaken);
+			DevMsg("CTFGameStats: bogus damage value found, %d, ignoring\n", iDamageTaken);
 			return;
 		}
 		else
 		{
-			DevMsg("CTFGameStats: Bogus Damage value found, %d\n", iDamageTaken);
+			DevMsg("CTFGameStats: bogus damage value found, %d\n", iDamageTaken);
 		}
 	}
 
