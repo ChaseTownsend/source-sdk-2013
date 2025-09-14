@@ -41,7 +41,7 @@ static ConVar tf_stats_nogameplaycheck( "tf_stats_nogameplaycheck", "0", FCVAR_N
 //static ConVar tf_stats_track( "tf_stats_track", "1", FCVAR_NONE, "Turn on//off tf stats tracking." );
 //static ConVar tf_stats_verbose( "tf_stats_verbose", "0", FCVAR_NONE, "Turn on//off verbose logging of stats." );
 ConVar tf_stats_bogus_damage_max("tf_stats_bogus_damage_max", "1500", FCVAR_REPLICATED, "Maximum damage before bogus warning");
-ConVar tf_stats_bogus_damage_mvm_max("tf_stats_bogus_damage_mvm_max", "5000", FCVAR_REPLICATED, "Maximum damage in MVM before bogus warning");
+ConVar tf_stats_bogus_damage_mvm_max("tf_stats_bogus_damage_mvm_max", "5000", FCVAR_REPLICATED, "Maximum damage in MvM before bogus warning");
 ConVar tf_stats_bogus_healing_max("tf_stats_bogus_healing_max", "1000", FCVAR_REPLICATED, "Maximum healing before bogus warning");
 ConVar tf_stats_bogus_block_damage_max("tf_stats_bogus_block_damage_max", "3000", FCVAR_REPLICATED, "Maximum damage blocked before bogus warning");
 ConVar tf_stats_bogus_return("tf_stats_bogus_return", "1", FCVAR_REPLICATED, "Return without recording stats if bogus values are found");
