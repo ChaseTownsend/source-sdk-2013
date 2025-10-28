@@ -1065,11 +1065,9 @@ void CTFGameStats::Event_PlayerDamage( CBasePlayer *pBasePlayer, const CTakeDama
 	if ( sv_cheats && !sv_cheats->GetBool() )
 	{
 		Assert( iDamageTaken >= 0 );
-	}
-	if ( ( iDamageTaken < 0 ) )
-		return;
 	
-	if ( iDamageTaken > INSANE_PLAYER_DAMAGE )
+	
+	if ( iDamageTaken < 0 || iDamageTaken > INSANE_PLAYER_DAMAGE )
 	{
 		if (tf_stats_bogus_return.GetBool())
 		{
