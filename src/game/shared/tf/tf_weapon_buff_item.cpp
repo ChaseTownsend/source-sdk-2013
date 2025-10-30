@@ -317,7 +317,6 @@ void CTFBuffItem::CreateBanner()
 		C_TFBuffBanner* pBanner = new C_TFBuffBanner;
 		if ( !pBanner )
 			return;
-		
 		//Assert( iBuffType > 0 );
 		//Assert( iBuffType <= ARRAYSIZE(BannerModels) );
 		pBanner->m_nSkin = 0;
