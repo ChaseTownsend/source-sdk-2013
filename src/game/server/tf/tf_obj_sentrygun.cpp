@@ -126,6 +126,7 @@ IMPLEMENT_SERVERCLASS_ST( CObjectSentrygun, DT_ObjectSentrygun )
 END_SEND_TABLE()
 
 BEGIN_DATADESC( CObjectSentrygun )
+		DEFINE_FIELD( m_flNextRocketAttack, FIELD_FLOAT )
 END_DATADESC()
 
 LINK_ENTITY_TO_CLASS(obj_sentrygun, CObjectSentrygun);
