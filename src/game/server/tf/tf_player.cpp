@@ -10783,10 +10783,12 @@ int CTFPlayer::OnTakeDamage_Alive( const CTakeDamageInfo &info )
 			Assert( (int)m_eBonusAttackEffect < 256 );
 			event->SetInt( "bonuseffect", (int)m_eBonusAttackEffect );
 
-			if ( pTFAttacker && pTFAttacker->GetActiveTFWeapon() )
+			/* if ( pTFAttacker && pTFAttacker->GetActiveTFWeapon() )
 			{
 				event->SetInt( "weaponid", pTFAttacker->GetActiveTFWeapon()->GetWeaponID() );
-			}
+			} */
+			event->SetInt( "weaponid", pTFWeapon ? pTFWeapon->GetWeaponID() : TF_WEAPON_NONE );
+			event->SetInt( "weapon_entindex", info.GetWeapon() ? info.GetWeapon()->entindex() : -1 );
 		}
 		// Hurt by world.
 		else
