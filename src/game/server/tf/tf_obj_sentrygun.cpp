@@ -2341,7 +2341,7 @@ void CObjectSentrygun::MakeScaledBuilding( CTFPlayer *pPlayer )
 	CALL_ATTRIB_HOOK_FLOAT_ON_OTHER( GetOwner(), iSmallSentry, build_small_sentries );
 	if ( iSmallSentry )
 	{
-		m_flScaledSentry = iSmallSentry ? SMALL_SENTRY_SCALE : 1.0f;
+		m_flScaledSentry = SMALL_SENTRY_SCALE; // remove un-nedded comparison
 
 		SetModelScale( m_flScaledSentry );
 
