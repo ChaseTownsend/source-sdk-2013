@@ -12704,6 +12704,14 @@ void CTFPlayer::Event_Killed( const CTakeDamageInfo &info )
 		}
 	}
 
+	if( iIceRagdoll == 0 )
+	{
+		if ( pKillerWeapon )
+		{
+			CALL_ATTRIB_HOOK_INT_ON_OTHER( pKillerWeapon, iIceRagdoll, set_turn_to_ice );
+		}
+	}
+
 	bool bCloakedCorpse = false;
 	if ( pKillerWeapon && pKillerWeapon->GetWeaponID() == TF_WEAPON_KNIFE )
 	{
