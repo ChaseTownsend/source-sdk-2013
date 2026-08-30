@@ -1,0 +1,17 @@
+#base items_game.txt
+
+"items_game"
+{
+	"attributes"
+	{
+		"4000"
+		{
+			"name"	"explosive bullets"
+			"attribute_class"	"mod_explosive_bullets"
+			"description_string"	"bullets explode (Base radius of 50)"
+			"description_format"	"value_is_additive"
+			"hidden"	"0"
+			"effect_type"	"neutral"
+		}
+	}
+}
