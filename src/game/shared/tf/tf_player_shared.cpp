@@ -10339,6 +10339,12 @@ void CTFPlayer::FireBullet( CTFWeaponBase *pWpn, const FireBulletsInfo_t &info, 
 	dmgInfo.SetWeapon( GetActiveWeapon() );
 	dmgInfo.SetDamageCustom( nCustomDamageType );
 
+	if ( iModExplosiveBullet )
+	{
+		dmgInfo.SetDamageType( DMG_BLAST );
+		bPenetratingShot = false;
+	}
+
 	int iPenetratedPlayerCount = 0;
 
 	int iEnemyPlayersHit = 0;
@@ -10457,12 +10463,36 @@ void CTFPlayer::FireBullet( CTFWeaponBase *pWpn, const FireBulletsInfo_t &info, 
 		// Damage only the first entity encountered on the bullet's path.
 		if ( trace.m_pEnt )
 		{
-			ModifyDamageInfo( &dmgInfo, trace.m_pEnt );
-			CalculateBulletDamageForce( &dmgInfo, info.m_iAmmoType, info.m_vecDirShooting, trace.endpos, 1.0 );
-			trace.m_pEnt->DispatchTraceAttack( dmgInfo, info.m_vecDirShooting, &trace );
-			if ( trace.m_pEnt->IsPlayer() && OnOpposingTFTeams( GetTeamNumber(), trace.m_pEnt->GetTeamNumber() ) )
+			if( iModExplosiveBullet )
 			{
-				iEnemyPlayersHit++;
+				float flRadius = 50.f; // base radius
+				// can hook radius by doing 
+				// CALL_ATTRIB_HOOK_FLOAT( flRadius, mult_explosion_radius );
+
+				// could make attributes for these
+				float min_radscale = 0.1f; // minimum radius mult
+				float flMinDistance = 900.f;
+				float flMaxDistance = 1200.f;
+
+				float distance = (vecStart - vecEnd).LengthSqr();
+				flRadius *= RemapValClamped( distance, flMinDistance, flMaxDistance, 1.0, min_radscale );
+				// Maps the value [distance] between [900, 1200], then maps that to [1.0, min_radscale]
+				// so if distance <= 900, the radius is multiplied by 1.0
+				// and linearly scales between 1.0 and min_radscale as distance increased
+				// upto 1200, where the radius is multiplied by min_radscale
+
+				CTFRadiusDamageInfo radiusinfo( &dmgInfo, vecEnd, flRadius, trace.m_pEnt );
+				TFGameRules()->RadiusDamage( radiusinfo );
+			}
+			else
+			{
+				ModifyDamageInfo( &dmgInfo, trace.m_pEnt );
+				CalculateBulletDamageForce( &dmgInfo, info.m_iAmmoType, info.m_vecDirShooting, trace.endpos, 1.0 );
+				trace.m_pEnt->DispatchTraceAttack( dmgInfo, info.m_vecDirShooting, &trace );
+				if ( trace.m_pEnt->IsPlayer() && OnOpposingTFTeams( GetTeamNumber(), trace.m_pEnt->GetTeamNumber() ) )
+				{
+					iEnemyPlayersHit++;
+				}
 			}
 		}
 	}
