@@ -44,6 +44,7 @@ using namespace GCSDK;
 
 static const char* GetWebBaseUrl()
 {
+	return "https://teamfortress.local.steam.dev/";
 	switch ( GetUniverse() )
 	{
 	case k_EUniverseDev:
