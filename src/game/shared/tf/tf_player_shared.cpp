@@ -10335,6 +10335,10 @@ void CTFPlayer::FireBullet( CTFWeaponBase *pWpn, const FireBulletsInfo_t &info, 
 	}
 
 #ifndef CLIENT_DLL
+
+	int iModExplosiveBullet;
+	CALL_ATTRIB_HOOK_INT( iModExplosiveBullet, mod_explosive_bullets );
+
 	CTakeDamageInfo dmgInfo( this, info.m_pAttacker, info.m_flDamage, nDamageType );
 	dmgInfo.SetWeapon( GetActiveWeapon() );
 	dmgInfo.SetDamageCustom( nCustomDamageType );
